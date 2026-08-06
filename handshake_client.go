@@ -1260,16 +1260,6 @@ func hostnameInSNI(name string) string {
 	if net.ParseIP(host) != nil {
 		return ""
 	}
-	dotCount := 0
-	for i := len(name) - 1; i >= 0; i-- {
-		if name[i] != '.' {
-			break
-		}
-		dotCount++
-	}
-	if dotCount > 1 {
-		name = name[:len(name)-(dotCount-1)]
-	}
 	return name
 }
 
