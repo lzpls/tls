@@ -1,4 +1,4 @@
-module github.com/metacubex/tls
+module github.com/lzpls/tls
 
 go 1.20
 
