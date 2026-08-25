@@ -1089,7 +1089,7 @@ func (c *Conn) verifyServerCertificate(certificates [][]byte) error {
 			opts := x509.VerifyOptions{
 				Roots:         c.config.RootCAs,
 				CurrentTime:   c.config.time(),
-				DNSName:       c.serverName,
+				DNSName:       stripTrailingDot(c.serverName),
 				Intermediates: x509.NewCertPool(),
 			}
 
@@ -1108,7 +1108,7 @@ func (c *Conn) verifyServerCertificate(certificates [][]byte) error {
 		opts := x509.VerifyOptions{
 			Roots:         c.config.RootCAs,
 			CurrentTime:   c.config.time(),
-			DNSName:       c.config.ServerName,
+			DNSName:       stripTrailingDot(c.config.ServerName),
 			Intermediates: x509.NewCertPool(),
 		}
 
