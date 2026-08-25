@@ -1377,7 +1377,7 @@ func (chi *ClientHelloInfo) SupportsCertificate(c *Certificate) error {
 		if err != nil {
 			return fmt.Errorf("failed to parse certificate: %w", err)
 		}
-		if err := x509Cert.VerifyHostname(chi.ServerName); err != nil {
+		if err := x509Cert.VerifyHostname(stripTrailingDot(chi.ServerName)); err != nil {
 			return fmt.Errorf("certificate is not valid for requested server name: %w", err)
 		}
 	}
@@ -1844,4 +1844,11 @@ func anyValidVerifiedChain(verifiedChains [][]*x509.Certificate, opts x509.Verif
 		}
 	}
 	return false
+}
+
+func stripTrailingDot(s string) string {
+	for len(s) > 0 && s[len(s)-1] == '.' {
+		s = s[:len(s)-1]
+	}
+	return s
 }

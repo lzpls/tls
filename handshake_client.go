@@ -401,7 +401,7 @@ func (c *Conn) loadSession(hello *clientHelloMsg) (
 			// The original connection had InsecureSkipVerify, while this doesn't.
 			return nil, nil, nil, nil
 		}
-		if err := session.peerCertificates[0].VerifyHostname(c.config.ServerName); err != nil {
+		if err := session.peerCertificates[0].VerifyHostname(stripTrailingDot(c.config.ServerName)); err != nil {
 			// This should be ensured by the cache key, but protect the
 			// application from a faulty ClientSessionCache implementation.
 			return nil, nil, nil, nil

@@ -1677,7 +1677,7 @@ func (c *Conn) VerifyHostname(host string) error {
 	if len(c.verifiedChains) == 0 {
 		return errors.New("tls: handshake did not verify certificate chain")
 	}
-	return c.peerCertificates[0].VerifyHostname(host)
+	return c.peerCertificates[0].VerifyHostname(stripTrailingDot(host))
 }
 
 // setReadTrafficSecret sets the read traffic secret for the given encryption level. If
